@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
             if (err) {
                 res.status(401).json({message: "Error in token."})
             } else {
-                req.user = decodedToken.user;
+                req.user = { department: decodedToken.department };
                 next();
             }
         })
@@ -18,3 +18,5 @@ module.exports = (req, res, next) => {
         res.status(401).json({message: "you shall not pass, no token!"})
     }
 }
+
+

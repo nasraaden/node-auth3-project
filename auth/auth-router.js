@@ -38,12 +38,17 @@ router.post("/login", (req, res) => {
             res.status(401).json({message: "Invalid credentials."})
         }
     })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({message: "Error while logging in."})
+    })
 })
 
 function signToken(user) {
     const payload = {
         userId: user.id,
-        username: user.username
+        username: user.username,
+        department: user.department
     };
     const options = {
         expiresIn: "1d"
@@ -52,4 +57,5 @@ function signToken(user) {
 }
 
 module.exports = router;
+
 
